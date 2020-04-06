@@ -6,7 +6,12 @@ build:
 run: build
 	docker run --rm -it -p 8080:8080 agassner/minikube-ruby-app:latest
 
-run_on_minikube:
+minikube_clean_up:
+	kubectl delete service/minikube-ruby-app-deployment
+	kubectl delete deployment/minikube-ruby-app-deployment
+	sleep 5
+
+run_on_minikube: minikube_clean_up
 	# Start Minikube
 	minikube start --vm-driver virtualbox
 	sleep 5
